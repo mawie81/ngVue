@@ -57,6 +57,10 @@ export function ngVueLinker (componentName, jqElement, elAttributes, scope, $inj
 
   scope.$on('$destroy', () => {
     vueInstance.$destroy()
-    vueInstance.$el.remove()
+    if (vueInstance.$el && vueInstance.$el.remove) {
+      vueInstance.$el.remove()
+    } else {
+      console.warn('can not remove ', vueInstance.$el)
+    }
   })
 }
